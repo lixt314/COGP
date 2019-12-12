@@ -28,11 +28,7 @@ from strongGPDataType import poolingType
 # defined by author
 import functionSet as fs
 import logging
-'''finished, can ren experiments'''
-##from plot_confusion_matrix import plot_conf_matrix
-##import matplotlib.pyplot as plt
-##dataSetName=str(sys.argv[1])
-#randomSeeds=int(sys.argv[2])
+
 randomSeeds =3
 dataSetName = 'f1'
 #data_path = '/vol/grid-solar/sgeusers/yingbi/conv_gp/al_madi/data_set/'
@@ -120,16 +116,6 @@ toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 toolbox.register("compile", gp.compile, pset=pset)
 toolbox.register("mapp", futures.map)
 
-def evalTrainb(individual):
-    func = toolbox.compile(expr=individual)
-    train_tf = []
-    for i in range(0, len(y_train)):
-        train_tf.append(np.asarray(func(x_train[i, :, :])))
-    min_max_scaler = preprocessing.MinMaxScaler()
-    train_norm = min_max_scaler.fit_transform(np.asarray(train_tf))
-    lsvm= LinearSVC()
-    accuracy = round(100*cross_val_score(lsvm, train_norm, y_train, cv=5).mean(),2)
-    return accuracy,
 
 def evalTrain(individual):
     try:

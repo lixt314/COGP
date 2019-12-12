@@ -1,17 +1,6 @@
 import random
 from deap import tools
-from collections import defaultdict
 import logging
-
-def pop_compare(ind1, ind2):
-    # List all available primitive types in each individual
-    types1 = defaultdict(list)
-    types2 = defaultdict(list)
-    for idx, node in enumerate(ind1[1:],1):
-        types1[node.ret].append(idx)
-    for idx, node in enumerate(ind2[1:],1):
-        types2[node.ret].append(idx)
-    return types1==types2
 
 
 def varAnd(population, toolbox, cxpb, mutpb):
